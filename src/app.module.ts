@@ -4,9 +4,11 @@ import { ProjectsModule } from './projects/projects.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
+import { HelloController } from './hello/hello.controller';
 
 @Module({
   imports: [TaskModule, ProjectsModule, AuthModule, UsersModule],
-  providers: [UsersService]
+  providers: [UsersService],
+  controllers: [HelloController]
 })
 export class AppModule {}
