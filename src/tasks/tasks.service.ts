@@ -2,36 +2,20 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class TasksService {
+
+  private tasks = []
+
   getTasks() {
-    return [
-      {
-        id: 1,
-        title: 'Task 1',
-        description: 'Task 1 description',
-      },
-      {
-        id: 2,
-        title: 'Task 2',
-        description: 'Task 2 description',
-      },
-      {
-        id: 3,
-        title: 'Task 3',
-        description: 'Task 3 description',
-      },
-    ];
+    return this.tasks;
   }
 
-  createTask() {
-    return {
-      id: 4,
-      title: 'Task 4',
-      description: 'Task 4 description',
-    };
+  createTask(task: any) {
+    this.tasks.push(task)
+    return task;
   }
 
   updateTask() {
-    return 'Task updated'
+    return 'Task updated';
   }
 
   deleteTask() {
@@ -39,6 +23,6 @@ export class TasksService {
   }
 
   patchTask() {
-    return 'Task p'
+    return 'Task p';
   }
 }
