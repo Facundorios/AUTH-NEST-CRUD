@@ -7,6 +7,7 @@ import {
   Patch,
   Body,
   Query,
+  Param,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 
@@ -16,8 +17,15 @@ export class TaskController {
 
   @Get()
   getAllTasks(@Query() query: any) {
-    console.log(query);
+    //console.log(query);
     return this.taskService.getTasks();
+  }
+  //Al decorador Get le pasamos como prametro '/:id', que se concatena con el 'tasks' del Decorador Controller. 
+  @Get('/:id')
+  getTask(@Param('id') id: string) {
+    //Con el decorador Param, definimos id (como esta definido en el Get) como un string
+    //console.log(id)
+    return this.taskService.getTask(parseInt(id))
   }
 
   @Post()
