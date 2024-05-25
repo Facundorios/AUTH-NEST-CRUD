@@ -1,5 +1,16 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Put,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
+import { createUserDto } from './dto/create-user.dto';
 
 @Controller({})
 export class UsersController {
@@ -7,25 +18,26 @@ export class UsersController {
 
   @Get('/users')
   getUsers() {
-    return this.userService.getUsers()
+    return this.userService.getUsers();
   }
 
   @Post('/users')
-  createUser() {
-    return this.userService.createUser()
+  createUser(@Body() user: createUserDto) {
+    return this.userService.createUser(user);
   }
-  @Put('/users')
-  updateUser() {
-    return this.userService.updateUser()
-  }
+  // @Put('/users')
+  // updateUser() {
+  //   return this.userService.updateUser();
+  // }
 
-  @Delete('/users')
-  deleteUser() {
-    return this.userService.deleteUser()
-  }
+  // @Delete('/users')
+  // deleteUser() {
+  //   return this.userService.deleteUser();
+  // }
 
-  @Patch('/users')
-  patchUser() {
-    return this.userService.patchUser()
-  }
+  // @Patch('/users')
+  // patchUser() {
+  //   return this.userService.patchUser();
+  // }
 }
+
