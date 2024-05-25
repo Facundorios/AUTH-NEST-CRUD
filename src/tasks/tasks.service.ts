@@ -1,4 +1,6 @@
 import { Injectable, HttpCode, NotFoundException } from '@nestjs/common';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -13,14 +15,14 @@ export class TasksService {
     const foundTask = this.tasks.find((task) => task.id === id);
 
     if(!foundTask) {
-      return new NotFoundException('no existe esa tarea')
+      return new NotFoundException('no existe esa tarea|')
     }
 
     return foundTask
 
   }
 
-  createTask(task: any) {
+  createTask(task: CreateTaskDto) {
     this.tasks.push({
       ...task,
       id: this.tasks.length,
@@ -28,7 +30,8 @@ export class TasksService {
     return task;
   }
 
-  updateTask() {
+  updateTask(task: UpdateTaskDto) {
+    console.log()
     return 'Task updated';
   }
 
