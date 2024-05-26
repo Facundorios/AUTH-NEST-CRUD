@@ -1,5 +1,16 @@
-import { Controller, Get, HttpCode, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  Req,
+  Res,
+  Param,
+  ParseIntPipe,
+  ParseBoolPipe,
+  Query,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
+import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
 
 @Controller()
 export class HelloController {
@@ -27,7 +38,28 @@ export class HelloController {
   error() {
     return 'This action returns an error response';
   }
-  
 
+  @Get('ticket/:num')
+  getNumber(@Param('num', ParseIntPipe) num: number) {
+    console.log(typeof num);
+    return `This action returns a #${num + 1} ticket`;
+  }
 
+  @Get('active/:status')
+  isUserActive(@Param('status', ParseBoolPipe) status: boolean) {
+    console.log(typeof status);
+    return 'oaa';
+  }
+
+  @Get('greet')
+  // greet(@Query() query: {name: string, age: number}) {
+  //   console.log(typeof query.age);
+  //   console.log(typeof query.name);
+  //   return `Hello ${query.name}, you are ${query.age} years old`;
+  // }
+  greet(@Query(ValidateUserPipe) query: { name: string; age: number }) {
+    console.log(typeof query.age);
+    console.log(typeof query.name);
+    return `Hello ${query.name}, you are ${query.age} years old, and in the next year you're going to be ${query.age + 1} years old.`;
+  }
 }
