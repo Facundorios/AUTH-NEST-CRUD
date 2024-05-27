@@ -12,7 +12,8 @@ import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [TaskModule, ProjectsModule, AuthModule, UsersModule, AdminModule, PaymentsModule],
-  providers: [UsersService, AdminService],
+  providers: [AdminService],
   controllers: [HelloController, AdminController]
 })
+
 export class AppModule {}

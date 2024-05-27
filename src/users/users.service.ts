@@ -1,31 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { createUserDto } from './dto/create-user.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class UsersService {
-  private users: any[] = [
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-    },
-    {
-      id: 2,
-      name: 'Jane Doe',
-      email: 'janedoe@gmail.com',
-    },
-  ];
+
+  constructor(private prisma: PrismaService) {}
 
   getUsers() {
-    return this.users;
+    return this.prisma.user.findMany();
   }
 
   createUser(user: createUserDto) {
-    this.users.push(user)
-    return {
-      ...user,
-      id: this.users.length + 1 
-    }
+    return this.prisma.user.create({
+      data: user,
+    });
   }
 
   updateUser() {
