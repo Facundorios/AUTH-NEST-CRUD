@@ -8,9 +8,10 @@ import { HelloController } from './hello/hello.controller';
 import { AdminController } from './admin/admin.controller';
 import { AdminService } from './admin/admin.service';
 import { AdminModule } from './admin/admin.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
-  imports: [TaskModule, ProjectsModule, AuthModule, UsersModule, AdminModule],
+  imports: [TaskModule, ProjectsModule, AuthModule, UsersModule, AdminModule, PaymentsModule],
   providers: [UsersService, AdminService],
   controllers: [HelloController, AdminController]
 })
